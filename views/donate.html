@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Donate | She Can Foundation</title>
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/donate.css">
+    <!-- GOOGLE FONT -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <h2>She Can Foundation</h2>
+
+        </div>
+
+        <ul class="nav-links">
+
+            <li><a href="/">Home</a></li>
+
+            <li><a href="/about">About</a></li>
+
+            <li><a href="/contact">Contact</a></li>
+
+            <li><a href="/donate">Donate</a></li>
+
+        </ul>
+
+    </nav>
+
+    <!-- ================= DONATION SECTION ================= -->
+
+    <section class="donation-page">
+
+        <div class="donation-card">
+
+            <!-- LEFT FORM -->
+
+            <div class="donation-form">
+
+                <h1>Charity Donation Form</h1>
+
+                <p>
+                    Support women empowerment and help
+                    communities through education and care.
+                </p>
+
+                <!-- FORM -->
+
+                <form id="donationForm">
+
+                    <!-- NAME -->
+
+                    <input
+                        type="text"
+                        name="donor_name"
+                        placeholder="Enter Full Name"
+                        required
+                    >
+
+                    <!-- EMAIL -->
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter Email Address"
+                        required
+                    >
+
+                    <!-- AMOUNT -->
+
+                    <input
+                        type="number"
+                        name="amount"
+                        placeholder="Enter Donation Amount"
+                        required
+                    >
+
+                    <!-- PAYMENT -->
+
+                    <select
+                        name="payment_method"
+                        required
+                    >
+
+                        <option value="">
+                            Select Payment Method
+                        </option>
+
+                        <option value="UPI">
+                            UPI
+                        </option>
+
+                        <option value="Card">
+                            Card
+                        </option>
+
+                        <option value="Net Banking">
+                            Net Banking
+                        </option>
+
+                    </select>
+
+                    <!-- MESSAGE -->
+
+                    <textarea
+                        placeholder="Write Your Message"
+                        rows="4"
+                    ></textarea>
+
+                    <!-- BUTTON -->
+
+                    <button type="submit">
+                        Donate Now
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- RIGHT IMAGE -->
+
+            <div class="donation-image">
+
+                <img
+                    src="/images/donation.jpg"
+                    alt="Donation Image"
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+    const form = document.getElementById('donationForm');
+
+    form.addEventListener('submit', async (e) => {
+
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        const data = {
+
+            donor_name: formData.get('donor_name'),
+
+            email: formData.get('email'),
+
+            amount: formData.get('amount'),
+
+            payment_method: formData.get('payment_method')
+
+        };
+
+        const response = await fetch('/donate-submit', {
+
+            method: 'POST',
+
+            headers: {
+
+                'Content-Type': 'application/json'
+
+            },
+
+            body: JSON.stringify(data)
+
+        });
+
+        const result = await response.json();
+
+        alert(result.message);
+
+        form.reset();
+
+    });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us | She Can Foundation</title>
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/contact.css">
+
+    <!-- GOOGLE FONT -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <h2>She Can Foundation</h2>
+
+        </div>
+
+        <ul class="nav-links">
+
+            <li><a href="/">Home</a></li>
+
+            <li><a href="/about">About</a></li>
+
+            <li><a href="/contact">Contact</a></li>
+
+        </ul>
+       
+        <a href="/donate">
+            <button class="donate-btn">
+                Donate
+            </button>
+        </a>
+
+    </nav>
+
+    <!-- ================= CONTACT SECTION ================= -->
+
+    <section class="contact-page">
+
+        <div class="contact-box">
+
+            <h1>Contact Us</h1>
+
+            <p>
+                We will love to hear from you. Send us your message.
+            </p>
+
+            <!-- FORM -->
+
+            <form action="/submit-form" method="POST">
+
+                <!-- NAME -->
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter Your Name"
+                    required
+                >
+
+                <!-- EMAIL -->
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter Your Email"
+                    required
+                >
+
+                <!-- MESSAGE -->
+
+                <textarea
+                    name="message"
+                    placeholder="Enter Your Message"
+                    required
+                ></textarea>
+
+                <!-- BUTTON -->
+
+                <button type="submit">
+                    Send Message
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+    <script>
+
+const form = document.getElementById('contactForm');
+
+form.addEventListener('submit', async (e) => {
+
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    const data = {
+
+        name: formData.get('name'),
+
+        email: formData.get('email'),
+
+        message: formData.get('message')
+
+    };
+
+    const response = await fetch('/submit-form', {
+
+        method: 'POST',
+
+        headers: {
+            'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify(data)
+
+    });
+
+    const result = await response.json();
+
+    alert(result.message);
+
+    form.reset();
+
+});
+
+</script>
+
+</body>
+
+</html>
